@@ -1,4 +1,4 @@
-name: DevInsight CI/CD
+name: CivicPulse CI/CD
 
 on:
   push:
