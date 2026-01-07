@@ -1,0 +1,59 @@
+name: DevInsight CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    name: Build & Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      # ---------------- CHECKOUT ----------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ---------------- NODE SETUP ----------------
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+
+      # ---------------- BACKEND ----------------
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Build backend
+        run: |
+          cd backend
+          npm run build || echo "No backend build step"
+
+      # ---------------- FRONTEND ----------------
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+  deploy:
+    name: Deploy to Render
+    needs: build-test
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Deploy Backend (Render)
+        run: curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"

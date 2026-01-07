@@ -1,0 +1,14 @@
+What is graphql-tag?
+What is context?
+What is parent inside resolvers?
+what is trigger ? and how you connected Supabase native auth to your profile table?
+How is setContext different from context on backend? Why using it on authLink?
+what is the point of using HttpLink , if we can directly provide uri ?
+Why the profilesTable trigger is not visible in Database->Triggers ? Ans Supabase Dashboard only shows triggers from the public schema. Your trigger lives on auth.users, which is in the auth schema.
+Why we have to declare types two times in Mutations?
+What is security definer?
+How is mySQL diffrent from PostgresSQL?
+
+
+Optimization:-
+Component getting re-rendered when index state changes.

@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Manrope:wght@200..800&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+.quotes {
+  font-family: "Playfair Display", sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+* {
+  font-family: "Barlow Condensed", "Poppins", sans-serif;
+}
+
+.curved-edge {
+  --c: 60px;
+  width: 100%;
+  aspect-ratio: 4 / 4;
+  background: #0f3f3a;
+
+  mask: radial-gradient(
+    var(--c) 60% at left,
+    transparent calc(100% - 1px),
+    #000
+  );
+}
+
+/* Animations */
+.loading-wave {
+  width: 70px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.loading-bar {
+  width: 5px;
+  height: 5px;
+  margin: 0 2px;
+  background-color: #0f3f3a;
+  border-radius: 5px;
+  animation: loading-wave-animation 1s ease-in-out infinite;
+}
+
+.quotesAnimate {
+  animation: quotes-animation 1s ease-in;
+  animation-delay: calc(var(--i) * 100ms);
+}
+
+.loading-bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.loading-bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.loading-bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.cardsAnimate {
+  animation: cardsAnimation 1s ease-in-out;
+  animation-delay: calc(var(--i) * 100ms);
+}
+
+@keyframes cardsAnimation {
+  0% {
+    opacity: 0%;
+    transform: translateX(-100px);
+  }
+
+  100% {
+    opacity: 100%;
+    transform: translateX(0);
+  }
+}
+
+@keyframes quotes-animation {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes loading-wave-animation {
+  0% {
+    height: 5px;
+  }
+
+  50% {
+    height: 20px;
+  }
+
+  100% {
+    height: 10px;
+  }
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideFade {
+  animation: slideFade 0.25s ease-out;
+}
+
+@media (max-width: 576px) {
+  .curved-edge {
+    --c: 300px;
+    aspect-ratio: 4 / 3;
+
+    mask: radial-gradient(
+      var(--c) 10% at top,
+      transparent calc(100% - 1px),
+      #000
+    );
+  }
+}
